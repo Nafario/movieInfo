@@ -51,7 +51,10 @@ const onInput = async event => {
       dropdown.classList.remove('is-active');
       input.value = movie.Title;
       onMovieSelect(movie);
-      footer.style.opacity = "1"
+      setTimeout(() =>{
+        footer.style.opacity = "1"
+      }, 1500)
+      
     });
 
     resultsWrapper.appendChild(option);
