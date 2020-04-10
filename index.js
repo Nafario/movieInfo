@@ -1,5 +1,5 @@
 const fetchData = async searchTerm => {
-  const response = await axios.get('https://www.omdbapi.com/', {
+  const response = await axios.get('https://cors-proxy.htmldriven.com/?url=https://www.omdbapi.com/', {
     params: {
       apikey: '7ee2fcbe',
       s: searchTerm
