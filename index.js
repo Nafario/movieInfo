@@ -1,4 +1,4 @@
-Access-Control-Allow-Origin: https:*
+Access-Control-Allow-Origin:*
 
 const fetchData = async searchTerm => {
   const response = await axios.get('https://www.omdbapi.com/', {
