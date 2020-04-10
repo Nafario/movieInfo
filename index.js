@@ -1,7 +1,7 @@
 const fetchData = async searchTerm => {
-  const response = await axios.get('https://www.omdbapi.com/',{
+  const response = await axios.get("https://www.omdbapi.com/", {
     params: {
-      apikey: '7ee2fcbe',
+      apikey: "7db9d83a",
       s: searchTerm
     }
   });
@@ -13,7 +13,7 @@ const fetchData = async searchTerm => {
   return response.data.Search;
 };
 
-const root = document.querySelector('.autocomplete');
+const root = document.querySelector(".autocomplete");
 root.innerHTML = `
   <label><b>Search For a Movie</b></label>
   <input class="input" placeholder="Movie Name" />
@@ -24,59 +24,58 @@ root.innerHTML = `
   </div>
 `;
 
-const input = document.querySelector('input');
-const dropdown = document.querySelector('.dropdown');
-const resultsWrapper = document.querySelector('.results');
-const footer = document.querySelector("footer")
+const input = document.querySelector("input");
+const dropdown = document.querySelector(".dropdown");
+const resultsWrapper = document.querySelector(".results");
+const footer = document.querySelector("footer");
 const onInput = async event => {
   const movies = await fetchData(event.target.value);
 
-  if (!movies.length == 0) {
-    dropdown.classList.remove('is-active');
+  if (!movies.length) {
+    dropdown.classList.remove("is-active");
     return;
   }
 
-  resultsWrapper.innerHTML = '';
-  dropdown.classList.add('is-active');
+  resultsWrapper.innerHTML = "";
+  dropdown.classList.add("is-active");
   for (let movie of movies) {
-    const option = document.createElement('a');
-    const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
+    const option = document.createElement("a");
+    const imgSrc = movie.Poster === "N/A" ? "" : movie.Poster;
 
-    option.classList.add('dropdown-item');
+    option.classList.add("dropdown-item");
     option.innerHTML = `
       <img src="${imgSrc}" />
       ${movie.Title}
     `;
-    option.addEventListener('click', () => {
-      dropdown.classList.remove('is-active');
+    option.addEventListener("click", () => {
+      dropdown.classList.remove("is-active");
       input.value = movie.Title;
       onMovieSelect(movie);
-      setTimeout(() =>{
-        footer.style.opacity = "1"
-      }, 1500)
-      
+      setTimeout(() => {
+        footer.style.opacity = "1";
+      }, 1500);
     });
 
     resultsWrapper.appendChild(option);
   }
 };
-input.addEventListener('input', debounce(onInput, 500));
+input.addEventListener("input", debounce(onInput, 500));
 
-document.addEventListener('click', event => {
+document.addEventListener("click", event => {
   if (!root.contains(event.target)) {
-    dropdown.classList.remove('is-active');
+    dropdown.classList.remove("is-active");
   }
 });
 
 const onMovieSelect = async movie => {
-  const response = await axios.get('https://www.omdbapi.com/', {
+  const response = await axios.get("https://www.omdbapi.com/", {
     params: {
-      apikey: '7ee2fcbe',
+      apikey: "7db9d83a",
       i: movie.imdbID
     }
   });
 
-  document.querySelector('#summary').innerHTML = movieTemplate(response.data);
+  document.querySelector("#summary").innerHTML = movieTemplate(response.data);
 };
 
 const movieTemplate = movieDetail => {
