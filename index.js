@@ -1,5 +1,7 @@
+
+
 const fetchData = async searchTerm => {
-  const response = await axios.get('https://www.omdbapi.com/', {
+  const response = await axios.get('https://cors-anywhere.herokuapp.com/https://www.omdbapi.com/', {headers: {'Access-Control-Allow-Origin': '*'}}{
     params: {
       apikey: '7ee2fcbe',
       s: searchTerm
