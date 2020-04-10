@@ -33,7 +33,7 @@ const footer = document.querySelector("footer")
 const onInput = async event => {
   const movies = await fetchData(event.target.value);
 
-  if (!movies.length) {
+  if (!movies.length == 0) {
     dropdown.classList.remove('is-active');
     return;
   }
